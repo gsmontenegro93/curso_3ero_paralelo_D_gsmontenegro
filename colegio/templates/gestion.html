@@ -1,0 +1,162 @@
+{% extends "basec.html" %}
+
+{% block title %} Bienvenido al sistema gestor de productos {% endblock %}
+
+{% block body %}
+    <div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+        {% if messages %}
+        {% for messageprov in messages %}
+        <div class="alert alert-dismissible alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong class="text-dark">{{ messageprov }}</strong>
+        </div>
+        {% endfor %}
+        {% endif %}
+            <br>
+        <h2>Ingresa la informacion del curso</h2>
+        <div class="card">
+            <div class="card-body">
+                <form action="/registrar_proovedor/" method="POST">{% csrf_token %}
+                    <div class="form-group mb-3">
+                        <input type="number" id="txtCodigo" name="txtid" class="form-control" placeholder="Id del curso"required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="text" id="txtNombre" name="txtNombre" class="form-control" placeholder="Nombre del curso"required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="text" id="txtNombre" name="txtdire" class="form-control" placeholder="Direccion del curso"required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="text" id="txtNombre" name="txtele" class="form-control" placeholder="Telefono del curso"required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <button type="submit" style="display: block; width: 100%;" class="btn btn-success btn-block text-white ">Guardar curso</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
+        <br>
+        <h1>Listado de curso</h1>
+    <br>
+    <div class="card card-body" style="text-align: center;">
+        <div class="table-responsive py-2">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nombre</th>
+                        <th>Direccion</th>
+                        <th>Telefono</th>
+                        <th colspan="2">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for p in proveedores %}
+                    <tr>
+                        <td>{{p.id}}</td>
+                        <td>{{p.nombre}}</td>
+                        <td>{{p.direccion}}</td>
+                        <td>{{p.telefono}}</td>
+                       <td>
+                            <form action="{% url 'editar_proveedor' id=p.id %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-info">Editar</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="{% url 'eliminar_proveedor' id=p.id %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+</div>
+    <br>
+    <br>
+    <br>
+    <div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+        {% if messages %}
+        {% for messageprodu in messages %}
+        <div class="alert alert-dismissible alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong class="text-dark">{{ messageprodu }}</strong>
+        </div>
+        {% endfor %}
+        {% endif %}
+        <br>
+        <h2>Ingresa la informacion de la estudiante</h2>
+        <div class="card">
+            <div class="card-body">
+                <form action="/registrar_producto/" method="POST">{% csrf_token %}
+                    <div class="form-group mb-3">
+                        <input type="text" id="txtCodigo" name="txtidpro" class="form-control" placeholder="Id del estudiante"required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="text" id="txtNombre" name="txtNombrepro" class="form-control" placeholder="Nombre de la estudiante"required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="text" id="txtNombre" name="txtdescrippro" class="form-control" placeholder="Materia"required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="number" id="txtNombre" name="txtidproovee" class="form-control" placeholder="Id del curso"required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <button type="submit" style="display: block; width: 100%;" class="btn btn-success btn-block text-white">Guardar estudiante</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
+        <h1>Listado de Mascotas</h1>
+    <br>
+    <div class="card card-body" style="text-align: center;">
+        <div class="table-responsive py-2">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+
+                        <th>Nombre</th>
+                        <th>Materia</th>
+                        <th colspan="2">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for p in productos %}
+                    <tr>
+
+                        <td>{{p.id}}</td>
+                        <td>{{p.nombre}}</td>
+                        <td>{{p.materia}}</td>
+                        <td>
+                            <form action="{% url 'editar_producto' id=p.id %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-info">Editar</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="{% url 'eliminar_producto' id=p.id %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+</div>
+{% endblock %}

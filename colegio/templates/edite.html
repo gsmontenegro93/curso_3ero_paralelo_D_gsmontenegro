@@ -1,0 +1,29 @@
+{% extends "basec.html" %}
+
+{% block title %} Edite el producto {% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <h2>Edición de estudiante/h2>
+        <div class="card">
+            <div class="card-body">
+                <form action="/producto_editado/" method="POST">{% csrf_token %}
+                    <div class="form-group mb-3">
+                        <input type="text" id="txtCodigo" name="txtidpro" value="{{editproduc.id}}" class="form-control" placeholder="Id del estudiante" readonly required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="text" id="txtNombre" name="txtNombrepro" value="{{editproduc.nombre}}" class="form-control" placeholder="Nombre del estudiante"required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="text" id="txtNombre" name="txtdescrippro" value="{{editproduc.descripcion_consulta}}" class="form-control" placeholder="Especie"required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <button type="submit" style="display: block; width: 100%;" class="btn btn-success btn-block text-white">Guardar Mascota</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
